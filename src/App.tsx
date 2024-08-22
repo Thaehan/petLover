@@ -8,7 +8,7 @@
 import React from 'react';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
-import {Home} from './screens/home/Home';
+import {Home} from './screen/hom/Home';
 
 const queryClient = new QueryClient();
 

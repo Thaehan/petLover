@@ -12,8 +12,9 @@ export function SearchList() {
     <FlashList
       data={data}
       renderItem={({item}) => <SearchItem item={item} />}
-      keyExtractor={item =>
-        `${item.id},${item.first_name},${item.last_name},${item.phoneNumber}`
+      keyExtractor={(item, index) =>
+        //Không dùng index cho keyExtractor
+        `${item.id},${item.first_name},${item.last_name},${item.phoneNumber},${index}`
       }
       estimatedItemSize={40}
       contentContainerStyle={styles.listContainer}
