@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import {FlashList} from '@shopify/flash-list';
 
-import {useSearch} from '../data/useSearch';
+import {useSearch} from '../Service/useSearch';
 import {SearchItem} from './SearchItem';
 
 export function SearchList() {

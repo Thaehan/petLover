@@ -1,9 +1,9 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 
-import {SearchHeader} from './Component/SearchHeader';
-import {SearchBar} from './Component/SearchBar';
-import {SearchList} from './Component/SearchList';
+import {SearchHeader} from './Components/SearchHeader';
+import {SearchBar} from './Components/SearchBar';
+import {SearchList} from './Components/SearchList';
 
 export function Home() {
   return (

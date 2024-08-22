@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-import {TContact} from '../../../Api/ContactApi';
+import {TContact} from '@Api/ContactApi';
 
 type TSearchItemProps = {
   item: TContact;
