@@ -5,7 +5,7 @@ import {SearchHeader} from './Components/SearchHeader';
 import {SearchBar} from './Components/SearchBar';
 import {SearchList} from './Components/SearchList';
 
-export function Home() {
+export function HomeScreen() {
   return (
     <View style={styles.container}>
       <SearchHeader />

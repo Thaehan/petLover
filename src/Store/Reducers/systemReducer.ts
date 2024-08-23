@@ -1,13 +1,14 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {TLanguageResource} from '@Translations/Languages';
 
-interface SystemState {
-  language: string;
+type SystemState = {
+  language: keyof TLanguageResource;
   showIntro: boolean;
   deviceToken: string;
   mode: 'online' | 'offline';
   count: number;
   text: string;
-}
+};
 
 const initialState: SystemState = {
   language: 'vi',

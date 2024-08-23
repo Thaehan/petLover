@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-interface KeyState {
+type KeyState = {
   key: string;
-}
+};
 
 const initialState: KeyState = {
   key: '',

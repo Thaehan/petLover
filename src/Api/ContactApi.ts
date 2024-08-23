@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-import {DOMAIN} from '.';
+import axiosInstance, {DOMAIN} from '.';
 
 const CONTACT_API = `${DOMAIN}/17acefab-0956-47/contacts`;
 
@@ -16,7 +14,7 @@ type TContactsResponse = {
 };
 
 const getContacts = async () => {
-  const result = await axios.get<TContactsResponse>(CONTACT_API);
+  const result = await axiosInstance.get<TContactsResponse>(CONTACT_API);
   return result.data.contacts;
 };
 

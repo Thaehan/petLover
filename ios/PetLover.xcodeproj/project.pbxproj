@@ -15,6 +15,8 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		85B709441A500C1680D89315 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F9D4D13B77D606341A2CDBDF /* PrivacyInfo.xcprivacy */; };
 		B6129AAC7EABE97189CF93BD /* Pods_PetLover_PetLoverTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946480E627550CEF16B5AD0F /* Pods_PetLover_PetLoverTests.framework */; };
+		BDE56DF8E29646D8B816C1EA /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A25A08980064EABBE4DC377 /* BootSplash.storyboard */; };
+		13FC449BAAAC4D5A97A9888F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C87FE3B8BC449108C8B4464 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		946480E627550CEF16B5AD0F /* Pods_PetLover_PetLoverTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetLover_PetLoverTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F9D4D13B77D606341A2CDBDF /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = PetLover/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3A25A08980064EABBE4DC377 /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "PetLover/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8C87FE3B8BC449108C8B4464 /* Colors.xcassets */ = {isa = PBXFileReference; name = "Colors.xcassets"; path = "PetLover/Colors.xcassets"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = folder.assetcatalog; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 				F9D4D13B77D606341A2CDBDF /* PrivacyInfo.xcprivacy */,
+				3A25A08980064EABBE4DC377 /* BootSplash.storyboard */,
+				8C87FE3B8BC449108C8B4464 /* Colors.xcassets */,
 			);
 			name = PetLover;
 			sourceTree = "<group>";
@@ -250,6 +256,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				85B709441A500C1680D89315 /* PrivacyInfo.xcprivacy in Resources */,
+				BDE56DF8E29646D8B816C1EA /* BootSplash.storyboard in Resources */,
+				13FC449BAAAC4D5A97A9888F /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

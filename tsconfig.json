@@ -10,7 +10,9 @@
       "@Theme/*": ["Theme/*"],
       "@Utils/*": ["Utils/*"],
       "@Api/*": ["Api/*"],
-      "@Assets/*": ["Assets/*"]
+      "@Assets/*": ["Assets/*"],
+      "@Navigations/*": ["Navigations/*"],
+      "@Translations/*": ["Translations/*"]
     }
   }
 }
