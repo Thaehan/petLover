@@ -8,27 +8,23 @@ export type TLanguageResource = {
   vi: {translation: Object};
   en: {translation: Object};
 };
+export type TLanguageResourceKey = keyof TLanguageResource;
 
 const resources: TLanguageResource = {
   vi: {translation: vi},
   en: {translation: en},
 };
 
-const DEFAULT_LANGUAGE: keyof TLanguageResource = 'vi';
+const DEFAULT_LANGUAGE: TLanguageResourceKey = 'vi';
 
-i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    compatibilityJSON: 'v3',
-    // the translations
-    // (tip move them in a JSON file and import them,
-    // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
-    resources,
-    lng: DEFAULT_LANGUAGE, // if you're using a language detector, do not define the lng option
-
-    interpolation: {
-      escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
-    },
-  });
+i18n.use(initReactI18next).init({
+  compatibilityJSON: 'v3',
+  resources,
+  lng: DEFAULT_LANGUAGE,
+  fallbackLng: DEFAULT_LANGUAGE,
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 export default i18n;

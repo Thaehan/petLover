@@ -3,13 +3,13 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {setCount, setText} from '@Store/Reducers/systemReducer';
-import {IRootState} from '@Store/index';
+import {RootState} from '@Store/index';
 import {setKey} from '@Store/Reducers/keyReducer';
 
 export function SearchHeader() {
-  const system = useSelector((state: IRootState) => state.system);
-  const key = useSelector((state: IRootState) => state.key);
   const dispatch = useDispatch();
+  const system = useSelector((state: RootState) => state.system);
+  const key = useSelector((state: RootState) => state.key);
 
   const onPress = () => {
     dispatch(setCount(Math.random() * 10));

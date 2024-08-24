@@ -1,6 +1,6 @@
 import axiosInstance, {DOMAIN} from '.';
 
-const CONTACT_API = `${DOMAIN}/17acefab-0956-47/contacts`;
+const CONTACT_API = `${DOMAIN}/api/v1/auth/me`;
 
 export type TContact = {
   id: string;
@@ -14,7 +14,9 @@ type TContactsResponse = {
 };
 
 const getContacts = async () => {
-  const result = await axiosInstance.get<TContactsResponse>(CONTACT_API);
+  const result = await axiosInstance.get<TContactsResponse>(
+    'https://www.mockachino.com/17acefab-0956-47/contacts',
+  );
   return result.data.contacts;
 };
 

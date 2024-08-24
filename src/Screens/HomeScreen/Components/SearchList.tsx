@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import React from 'react';
-import {FlashList} from '@shopify/flash-list';
 
+import AppList from '@Components/AppList';
 import {useSearch} from '../Service/useSearch';
 import {SearchItem} from './SearchItem';
 
@@ -9,7 +9,7 @@ export function SearchList() {
   const {data} = useSearch();
 
   return (
-    <FlashList
+    <AppList
       data={data}
       renderItem={({item}) => <SearchItem item={item} />}
       keyExtractor={(item, index) =>
@@ -18,6 +18,7 @@ export function SearchList() {
       }
       estimatedItemSize={40}
       contentContainerStyle={styles.listContainer}
+      emptyTitle={'Empty List'}
     />
   );
 }

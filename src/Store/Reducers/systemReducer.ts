@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {TLanguageResource} from '@Translations/Languages';
+import {TLanguageResourceKey} from '@Translations/Languages';
 
 type SystemState = {
-  language: keyof TLanguageResource;
+  language: TLanguageResourceKey;
   showIntro: boolean;
   deviceToken: string;
   mode: 'online' | 'offline';

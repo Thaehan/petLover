@@ -8,20 +8,28 @@ import {combinedReducers} from './Reducers/combinedReducers';
 const persistedReducer = persistReducer(
   {
     key: 'root',
-    whitelist: ['system'],
+    whitelist: ['system', 'user'],
     storage: mmkvStorage,
   },
   combinedReducers,
 );
 
 // Init store
-const store = legacy_createStore(persistedReducer);
+export const store = legacy_createStore(persistedReducer);
 
 // Init persistor
-const persistor = persistStore(store);
+export const persistor = persistStore(store);
+
+export const getStoreByKey = <T extends RootStateKey>(key: T) => {
+  const storage = mmkvStorage.getMap('persist:root') as RootStateRaw;
+  const resultStore: RootState[T] = JSON.parse(storage[key]);
+  return resultStore;
+};
 
 // Get store type
 const typeStore = configureStore({reducer: combinedReducers});
-
-export {store, persistor};
-export type IRootState = ReturnType<typeof typeStore.getState>;
+export type RootState = ReturnType<typeof typeStore.getState>;
+export type RootStateKey = keyof RootState;
+export type RootStateRaw = {
+  [k in RootStateKey]: string;
+};

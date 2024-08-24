@@ -1,3 +1,4 @@
+import {getStoreByKey} from '@Store/index';
 import axios from 'axios';
 
 export const DOMAIN = process.env.API_URL;
@@ -9,7 +10,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async config => {
-    const token = 'your_token_here';
+    const storage = getStoreByKey('user');
+    console.log(storage.accessToken);
+    const token = '';
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -26,6 +29,9 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   error => {
+    if (error.response && error.response.status === 404) {
+      console.error('Not found.');
+    }
     if (error.response && error.response.status === 401) {
       console.error('Unauthorized, please login again.');
     }
