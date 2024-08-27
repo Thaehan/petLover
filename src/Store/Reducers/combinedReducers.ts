@@ -1,10 +1,12 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import systemReducer from './systemReducer';
-import keyReducer from './keyReducer';
-import userReucer from './userReducer';
+import system from './systemReducer';
+import user from './userReducer';
+import searchContact from './searchContactReducer';
+import offlineData from './offlineDataReducer';
 
 export const combinedReducers = combineReducers({
-  system: systemReducer,
-  key: keyReducer,
-  user: userReucer,
+  system,
+  user,
+  searchContact,
+  offlineData,
 });

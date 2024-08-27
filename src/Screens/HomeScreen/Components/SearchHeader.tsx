@@ -1,36 +1,37 @@
-import {View, Text, Button, TextInput} from 'react-native';
+import {View, TextInput, StyleSheet} from 'react-native';
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
-import {setCount, setText} from '@Store/Reducers/systemReducer';
-import {RootState} from '@Store/index';
-import {setKey} from '@Store/Reducers/keyReducer';
+import {setSearchText} from '@Store/Reducers/searchContactReducer';
+import {useDebounceCallback} from '@Utils/Hooks';
+import {BORDER, FONT_SIZE, PADDING_SIZE} from '@Theme/AppTheme';
 
 export function SearchHeader() {
   const dispatch = useDispatch();
-  const system = useSelector((state: RootState) => state.system);
-  const key = useSelector((state: RootState) => state.key);
-
-  const onPress = () => {
-    dispatch(setCount(Math.random() * 10));
-  };
+  const {debounce} = useDebounceCallback();
 
   return (
     <View>
-      <Text>{system.count}</Text>
-      <Text>{system.text}</Text>
-      <Text>{key.key}</Text>
-      <Button title="Count1" onPress={onPress} />
       <TextInput
+        style={styles.textField}
         onChangeText={text => {
-          dispatch(setText(text));
-        }}
-      />
-      <TextInput
-        onChangeText={text => {
-          dispatch(setKey(text));
+          debounce(() => {
+            dispatch(setSearchText(text));
+          });
         }}
       />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  textField: {
+    marginHorizontal: PADDING_SIZE.md,
+    marginVertical: PADDING_SIZE.lg,
+    paddingHorizontal: PADDING_SIZE.md,
+    borderRadius: BORDER.circle,
+    backgroundColor: 'white',
+    elevation: 5, // For Android shadow
+    fontSize: FONT_SIZE.xl,
+  },
+});

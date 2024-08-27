@@ -1,12 +1,12 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import {View, Text} from 'react-native';
-import {Button} from 'react-native-paper';
-import Toast from 'react-native-toast-message';
+import {View} from 'react-native';
+import {Button, Text} from 'react-native-paper';
 import {StackActions, useNavigation} from '@react-navigation/native';
 
 import SCREEN_KEYS from '@Constants/screenKeys';
 import {useLocalization} from '@Translations/useLocalization';
+import {AppPrimaryButton} from '@Components/AppButton';
 
 export function LoginScreen() {
   const navigation = useNavigation();
@@ -14,29 +14,28 @@ export function LoginScreen() {
 
   return (
     <View>
-      <Text>{translate('home.today')}</Text>
-      <Text>{dayjs().from(dayjs().subtract(2, 'minutes'))}</Text>
-      <Button
-        onPress={() => {
-          Toast.show({
-            text1: 'cac',
-          });
-          if (currentLanguage === 'en') {
-            changeLanguage('vi');
-            return;
-          }
-          changeLanguage('en');
-        }}>
-        <Text>change language</Text>
-      </Button>
       <Button
         onPress={() => {
           navigation.dispatch(
             StackActions.replace(SCREEN_KEYS.DRAWER_NAVIGATOR),
           );
         }}>
-        <Text>10</Text>
+        <Text>Login</Text>
       </Button>
+      <View>
+        <Text>{translate('common.today')}</Text>
+        <Text>{dayjs().from(dayjs().subtract(2, 'minutes'))}</Text>
+        <AppPrimaryButton
+          title={translate('common.change_language')}
+          onPress={() => {
+            if (currentLanguage === 'en') {
+              changeLanguage('vi');
+              return;
+            }
+            changeLanguage('en');
+          }}
+        />
+      </View>
     </View>
   );
 }

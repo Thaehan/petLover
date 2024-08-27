@@ -1,24 +1,29 @@
-import {StyleSheet} from 'react-native';
 import React from 'react';
+import {StyleSheet} from 'react-native';
 
-import AppList from '@Components/AppList';
+import {AppList} from '@Components/AppList';
+import {useLocalization} from '@Translations/useLocalization';
 import {useSearch} from '../Service/useSearch';
 import {SearchItem} from './SearchItem';
+import {PADDING_SIZE} from '@Theme/AppTheme';
 
 export function SearchList() {
-  const {data} = useSearch();
+  const {translate} = useLocalization();
+  const {data, isRefetching, refetch, isLoading} = useSearch();
 
   return (
     <AppList
       data={data}
       renderItem={({item}) => <SearchItem item={item} />}
-      keyExtractor={(item, index) =>
-        //Không dùng index cho keyExtractor
-        `${item.id},${item.first_name},${item.last_name},${item.phoneNumber},${index}`
+      isLoading={isLoading}
+      keyExtractor={item =>
+        `${item.id},${item.first_name},${item.last_name},${item.phoneNumber}`
       }
+      refreshing={isRefetching}
+      onRefresh={refetch}
       estimatedItemSize={40}
       contentContainerStyle={styles.listContainer}
-      emptyTitle={'Empty List'}
+      emptyTitle={translate('common.empty_data')}
     />
   );
 }
@@ -26,7 +31,6 @@ export function SearchList() {
 const styles = StyleSheet.create({
   listStyle: {},
   listContainer: {
-    backgroundColor: 'cyan',
-    paddingBottom: 12,
+    paddingBottom: PADDING_SIZE.md,
   },
 });

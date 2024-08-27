@@ -5,11 +5,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {useInitLocalization} from '@Translations/useLocalization';
 import {MainStackNavigator} from '@Navigations/MainNavigator';
 import ContactApi from '@Api/ContactApi';
-import {useDispatch} from 'react-redux';
-import {setAccessToken} from '@Store/Reducers/userReducer';
 
 export function AppInitContainer() {
-  const dispatch = useDispatch();
   useInitLocalization();
 
   const onReady = () => {
@@ -19,7 +16,6 @@ export function AppInitContainer() {
   };
 
   useEffect(() => {
-    dispatch(setAccessToken('asd123'));
     ContactApi.getContacts();
   }, []);
 

@@ -1,8 +1,47 @@
-import {useEffect, useRef, useCallback} from 'react';
+import {useEffect, useRef, useCallback, useState} from 'react';
 import {AppState, AppStateStatus} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 
-export default function useQueryFocus<T>(
+import {DEFAULT_DEBOUNCE_TIME} from '@Constants/commons';
+
+export function useDebounceValue<T>(value: T, delay?: number) {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    // Set up a timeout to call the callback after the specified delay
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay ?? DEFAULT_DEBOUNCE_TIME);
+
+    // Cleanup function to clear the timeout if the dependencies change
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return {
+    debouncedValue,
+  };
+}
+
+export function useDebounceCallback() {
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const debounce = (callback: Function, delay?: number) => {
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      callback();
+    }, delay ?? DEFAULT_DEBOUNCE_TIME);
+  };
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
+  return {debounce};
+}
+
+export function useQueryFocus<T>(
   refetch: () => Promise<T> | void,
   timeout?: number,
 ) {

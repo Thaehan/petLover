@@ -4,11 +4,12 @@ import {persistStore, persistReducer} from 'redux-persist';
 import mmkvStorage from './mmkvStorage'; // Import instance MMKV
 import {combinedReducers} from './Reducers/combinedReducers';
 
+const PERSIST_KEY = 'persist:root';
 // Combine persist config with combined reducers
 const persistedReducer = persistReducer(
   {
     key: 'root',
-    whitelist: ['system', 'user'],
+    whitelist: ['system', 'user', 'offlineData'],
     storage: mmkvStorage,
   },
   combinedReducers,
@@ -21,7 +22,7 @@ export const store = legacy_createStore(persistedReducer);
 export const persistor = persistStore(store);
 
 export const getStoreByKey = <T extends RootStateKey>(key: T) => {
-  const storage = mmkvStorage.getMap('persist:root') as RootStateRaw;
+  const storage: RootStateRaw = mmkvStorage.getMap(PERSIST_KEY);
   const resultStore: RootState[T] = JSON.parse(storage[key]);
   return resultStore;
 };
