@@ -19,8 +19,6 @@ export function useSearch() {
     (state: RootState) => state.searchContact.searchText,
   );
 
-  console.log(contacts);
-
   const searchQuery = useQuery({
     queryKey: [QUERY_KEYS.SEARCH_CONTACT],
     queryFn: ContactApi.getContacts,

@@ -2,6 +2,7 @@
 #import "RNBootSplash.h" 
 
 #import <React/RCTBundleURLProvider.h>
+#import <WebRTC/RTCAudioSession.h>
 
 @implementation AppDelegate
 
