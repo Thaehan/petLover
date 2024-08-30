@@ -20,11 +20,12 @@ export function useVideoCall() {
       rtcpMuxPolicy: 'require',
     }),
   );
-  const [localStream, setLocalStream] = useState<MediaStream>();
-  const [remoteStream, setRemoteStream] = useState<MediaStream>();
+  const [offerData, setOfferData] = useState();
+  const [localStream, setLocalStream] = useState<MediaStream | null>();
+  const [remoteStream, setRemoteStream] = useState<MediaStream | null>();
 
   // Tạo offer
-  const createOffer = async () => {
+  const createACall = async () => {
     if (pc.current) {
       const offer = await pc.current.createOffer({});
       await pc.current.setLocalDescription(offer);
@@ -35,10 +36,7 @@ export function useVideoCall() {
   const socketListener = () => {
     //Handle recieve offer from socket
     SOCKET.on('offer', async offer => {
-      await pc.current.setRemoteDescription(new RTCSessionDescription(offer));
-      const answer = await pc.current.createAnswer();
-      await pc.current.setLocalDescription(answer);
-      SOCKET.emit('answer', answer);
+      setOfferData(offer);
     });
 
     //Handle recieve answer from socket
@@ -49,6 +47,12 @@ export function useVideoCall() {
     //Handle recieve ice candidate from socket
     SOCKET.on('ice-candidate', data => {
       pc.current.addIceCandidate(new RTCIceCandidate(data));
+    });
+
+    //Handle recieve end session
+    SOCKET.on('endCall', () => {
+      setLocalStream(null);
+      pc.current?.close();
     });
   };
 
@@ -82,20 +86,42 @@ export function useVideoCall() {
     } catch (error) {}
   };
 
-  useEffect(() => {
-    socketListener();
+  const startCalling = () => {
     peerConnectionHandler();
     recieveLocalStream();
+  };
+
+  const acceptCalling = async () => {
+    await pc.current.setRemoteDescription(new RTCSessionDescription(offerData));
+    const answer = await pc.current.createAnswer();
+    await pc.current.setLocalDescription(answer);
+    SOCKET.emit('answer', answer);
+  };
+
+  const endCalling = () => {
+    SOCKET.emit('endCall', {});
+    setLocalStream(null);
+    pc.current?.close();
+  };
+
+  useEffect(() => {
+    socketListener();
 
     return () => {
       pc.current?.close();
+      // Clear pc ref
+      // pc.current = null;
       SOCKET.disconnect();
     };
   }, []);
 
   return {
-    createOffer,
+    createACall,
     localStream,
     remoteStream,
+    startCalling,
+    acceptCalling,
+    endCalling,
+    offerData,
   };
 }
