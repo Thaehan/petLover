@@ -12,7 +12,8 @@
       "@Api/*": ["Api/*"],
       "@Assets/*": ["Assets/*"],
       "@Navigations/*": ["Navigations/*"],
-      "@Translations/*": ["Translations/*"]
+      "@Translations/*": ["Translations/*"],
+      "@Hooks/*": ["Hooks/*"]
     }
   }
 }

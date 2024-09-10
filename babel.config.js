@@ -33,6 +33,7 @@ module.exports = {
           '@Assets': './src/Assets',
           '@Navigations': './src/Navigations',
           '@Translations': './src/Translations',
+          '@Hooks': './src/Hooks',
         },
       },
     ],

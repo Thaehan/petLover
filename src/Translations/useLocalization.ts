@@ -1,15 +1,15 @@
 import {useEffect} from 'react';
 import dayjs from 'dayjs';
 import {useTranslation} from 'react-i18next';
-import {useSelector, useDispatch} from 'react-redux';
 
 import {TLanguageResourceKey} from './Languages';
 import {RootState} from '@Store/index';
-import {setLanguage} from '@Store/Reducers/systemReducer';
+import {setLanguage} from '@Store/Slices/systemSlice';
+import {useAppDispatch, useAppSelector} from '@Hooks/Hooks';
 
 export function useInitLocalization() {
   const {i18n} = useTranslation();
-  const language = useSelector((state: RootState) => state.system.language);
+  const language = useAppSelector((state: RootState) => state.system.language);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -19,7 +19,7 @@ export function useInitLocalization() {
 
 export function useLocalization() {
   const {t, i18n} = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const changeLanguage = (language: TLanguageResourceKey) => {
     dispatch(setLanguage(language));

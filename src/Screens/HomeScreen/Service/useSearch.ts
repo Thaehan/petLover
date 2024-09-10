@@ -1,23 +1,18 @@
-import {useDispatch, useSelector} from 'react-redux';
 import {useQuery} from '@tanstack/react-query';
 
 import QUERY_KEYS from '@Constants/queryKeys';
 import ContactApi from '@Api/ContactApi';
 import {searchContacts} from '@Utils/Algorithm';
-import {RootState} from '@Store/index';
-import {setContacts} from '@Store/Reducers/offlineDataReducer';
+import {setContacts} from '@Store/Slices/offlineDataSlice';
+import {useAppDispatch, useAppSelector} from '@Hooks/Hooks';
 
 //Setup stale time 2 mins
 const SEARCH_CONTACT_STALETIME = 1000 * 60 * 2;
 
 export function useSearch() {
-  const dispatch = useDispatch();
-  const contacts = useSelector(
-    (state: RootState) => state.offlineData.contacts,
-  );
-  const searchText = useSelector(
-    (state: RootState) => state.searchContact.searchText,
-  );
+  const dispatch = useAppDispatch();
+  const contacts = useAppSelector(state => state.offlineData.contacts);
+  const searchText = useAppSelector(state => state.searchContact.searchText);
 
   const searchQuery = useQuery({
     queryKey: [QUERY_KEYS.SEARCH_CONTACT],

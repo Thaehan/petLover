@@ -2,8 +2,8 @@ import {View, TextInput, StyleSheet} from 'react-native';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import {setSearchText} from '@Store/Reducers/searchContactReducer';
-import {useDebounceCallback} from '@Utils/Hooks';
+import {setSearchText} from '@Store/Slices/searchContactSlice';
+import {useDebounceCallback} from 'Hooks/Hooks';
 import {BORDER, FONT_SIZE, PADDING_SIZE} from '@Theme/AppTheme';
 
 export function SearchHeader() {

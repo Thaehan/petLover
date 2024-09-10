@@ -1,8 +1,16 @@
 import {useEffect, useRef, useCallback, useState} from 'react';
 import {AppState, AppStateStatus} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 import {DEFAULT_DEBOUNCE_TIME} from '@Constants/commons';
+import {AppDispatch, RootState} from '@Store/index';
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export function useAppDispatch() {
+  return useDispatch<AppDispatch>();
+}
 
 export function useDebounceValue<T>(value: T, delay?: number) {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
