@@ -4110,6 +4110,7 @@ __metadata:
     react-native: 0.74.2
     react-native-bootsplash: ^6.1.1
     react-native-callkeep: ^4.3.14
+    react-native-device-setting: "link:./modules/react-native-device-setting"
     react-native-dotenv: ^3.4.11
     react-native-eddystone-beacon: "link:./modules/react-native-eddystone-beacon"
     react-native-fast-image: ^8.6.3
@@ -10007,6 +10008,12 @@ __metadata:
   checksum: b7141a69bbd9cf1c9eef737aae6d22bc413de08692be8e042652cd3951caad0f53df872ebf13d415039c56639a8d0d05b94ca724c94704e86097ceb8bf7b8206
   languageName: node
   linkType: hard
+
+"react-native-device-setting@link:./modules/react-native-device-setting::locator=PetLover%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "react-native-device-setting@link:./modules/react-native-device-setting::locator=PetLover%40workspace%3A."
+  languageName: node
+  linkType: soft
 
 "react-native-dotenv@npm:^3.4.11":
   version: 3.4.11
