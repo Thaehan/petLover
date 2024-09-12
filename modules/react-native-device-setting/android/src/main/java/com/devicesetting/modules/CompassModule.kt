@@ -13,7 +13,7 @@ class CompassModule : SensorEventListener {
   private var sensorManager: SensorManager? = null
   private var accelerometerSensor: Sensor? = null
   private var magnetometerSensor: Sensor? = null
-  private var promise: ((Float) -> Unit)? = null
+  private var promise: ((Double) -> Unit)? = null
   private var listener = null
 
   private val eventName = "COMPASS_EVENT"
@@ -36,9 +36,7 @@ class CompassModule : SensorEventListener {
     }
   }
 
-  fun startListening(onHeadingUpdated: (Float) -> Unit) {
-    val mapData = Arguments.createMap()
-    eventSender?.sendEvent(eventName, mapData)
+  fun startListening(onHeadingUpdated: (Double) -> Unit) {
     promise = onHeadingUpdated
     accelerometerSensor?.let {
       sensorManager?.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
@@ -49,12 +47,25 @@ class CompassModule : SensorEventListener {
   }
 
   fun stopListening() {
-    val mapData = Arguments.createMap()
-    eventSender?.sendEvent(eventName, mapData)
     sensorManager?.unregisterListener(this)
   }
 
   override fun onSensorChanged(event: SensorEvent?) {
+    var mapData = Arguments.createMap()
+    var rMArray = Arguments.createArray()
+    var oAArray = Arguments.createArray()
+    for (value in rotationMatrix) {
+      rMArray.pushDouble(value.toDouble()) // WritableArray only accepts Double for numbers
+    }
+    for (value in orientationAngles) {
+      oAArray.pushDouble(value.toDouble()) // WritableArray only accepts Double for numbers
+    }
+    mapData.putArray("rotationMatrix", rMArray)
+    mapData.putArray("orientationAngles", oAArray)
+
+    var eventData = EventData(mapData)
+    eventSender?.sendEvent(eventName, eventData)
+
     event?.let {
       when (it.sensor.type) {
         Sensor.TYPE_ACCELEROMETER ->
@@ -73,7 +84,7 @@ class CompassModule : SensorEventListener {
       ) {
         SensorManager.getOrientation(rotationMatrix, orientationAngles)
         val azimuthInRadians = orientationAngles[0]
-        val azimuthInDegrees = Math.toDegrees(azimuthInRadians.toDouble()).toFloat()
+        val azimuthInDegrees = Math.toDegrees(azimuthInRadians.toDouble())
         promise?.invoke(azimuthInDegrees)
       }
     }

@@ -4,12 +4,10 @@ import {NativeEventEmitter, NativeModules} from 'react-native';
 const {DeviceSetting} = NativeModules;
 
 const COMPASS_EVENT = 'COMPASS_EVENT';
-const eventEmitter = new NativeEventEmitter(DeviceSetting);
 
 const startListeningCompass = async () => {
   try {
     await DeviceSetting.startListeningCompass();
-    console.log('send');
   } catch (error) {
     console.error(error);
   }
@@ -18,19 +16,20 @@ const startListeningCompass = async () => {
 const stopListeningCompass = async () => {
   try {
     await DeviceSetting.stopListeningCompass();
-    console.log('send');
   } catch (error) {
     console.error(error);
   }
 };
 
 const useCompassListener = (callback: (data: any) => void) => {
+  const eventEmitter = new NativeEventEmitter(DeviceSetting);
+
   useEffect(() => {
     const subscription = eventEmitter.addListener(COMPASS_EVENT, callback);
 
     return () => {
-      eventEmitter.removeAllListeners(COMPASS_EVENT);
       subscription.remove();
+      eventEmitter.removeAllListeners(COMPASS_EVENT);
     };
   }, []);
 };
