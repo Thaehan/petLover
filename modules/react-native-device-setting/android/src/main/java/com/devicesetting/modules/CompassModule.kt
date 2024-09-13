@@ -52,19 +52,14 @@ class CompassModule : SensorEventListener {
 
   override fun onSensorChanged(event: SensorEvent?) {
     var mapData = Arguments.createMap()
-    var rMArray = Arguments.createArray()
-    var oAArray = Arguments.createArray()
-    for (value in rotationMatrix) {
-      rMArray.pushDouble(value.toDouble()) // WritableArray only accepts Double for numbers
-    }
-    for (value in orientationAngles) {
-      oAArray.pushDouble(value.toDouble()) // WritableArray only accepts Double for numbers
-    }
-    mapData.putArray("rotationMatrix", rMArray)
-    mapData.putArray("orientationAngles", oAArray)
 
-    var eventData = EventData(mapData)
-    eventSender?.sendEvent(eventName, eventData)
+    if (event != null) {
+      var eventData = EventData(mapData)
+      eventSender?.sendEvent(eventName, eventData)
+      mapData.putDouble("x", event.values.get(0).toDouble())
+      mapData.putDouble("y", event.values.get(1).toDouble())
+      mapData.putDouble("z", event.values.get(2).toDouble())
+    }
 
     event?.let {
       when (it.sensor.type) {

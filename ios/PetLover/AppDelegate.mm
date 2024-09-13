@@ -3,6 +3,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <WebRTC/RTCAudioSession.h>
+#import "DeviceSetting.h"
 
 @implementation AppDelegate
 
@@ -32,6 +33,10 @@
 
 - (void)customizeRootView:(RCTRootView *)rootView {
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // ⬅️ initialize the splash screen
+}
+
+- (NSArray<NSString *> *)extraModulesForBridge:(RCTBridge *)bridge {
+    return @[[[DeviceSetting alloc] init]];
 }
 
 @end
