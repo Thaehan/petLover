@@ -16,16 +16,16 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <Provider store={store}>
-      <PaperProvider theme={APP_THEME}>
-        <PersistGate persistor={persistor}>
+      <PersistGate persistor={persistor}>
+        <PaperProvider theme={APP_THEME}>
           <QueryClientProvider client={queryClient}>
             <BottomSheetModalProvider>
               <AppInitContainer />
               <Toast />
             </BottomSheetModalProvider>
           </QueryClientProvider>
-        </PersistGate>
-      </PaperProvider>
+        </PaperProvider>
+      </PersistGate>
     </Provider>
   );
 }

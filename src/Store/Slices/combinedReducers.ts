@@ -3,12 +3,10 @@ import system from './systemSlice';
 import user from './userSlice';
 import searchContact from './searchContactSlice';
 import offlineData from './offlineDataSlice';
-import testSaga from './testSagaSlice';
 
-export const combinedReducers = combineReducers({
+export default combineReducers({
   system,
   user,
   searchContact,
   offlineData,
-  testSaga,
 });
