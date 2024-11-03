@@ -1,9 +1,9 @@
 #import "AppDelegate.h"
-#import "RNBootSplash.h" 
+#import "RNBootSplash.h"
+#import "DeviceSetting-Bridging-Header.h"
 
 #import <React/RCTBundleURLProvider.h>
 #import <WebRTC/RTCAudioSession.h>
-#import "DeviceSetting.h"
 
 @implementation AppDelegate
 
@@ -35,8 +35,8 @@
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // ⬅️ initialize the splash screen
 }
 
-- (NSArray<NSString *> *)extraModulesForBridge:(RCTBridge *)bridge {
-    return @[[[DeviceSetting alloc] init]];
-}
+//- (NSArray<NSString *> *)extraModulesForBridge:(RCTBridge *)bridge {
+//    return @[[[DeviceSetting alloc] init]];
+//}
 
 @end
