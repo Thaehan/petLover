@@ -1,107 +1,89 @@
-import React, {ReactNode, useEffect, useRef, useState} from 'react';
+import React, {ReactNode} from 'react';
 import {
   StyleSheet,
-  StyleSheetProperties,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
+  ViewStyle,
 } from 'react-native';
-import {Button, ButtonProps, Text} from 'react-native-paper';
-import LottieView, {LottieViewProps} from 'lottie-react-native';
 
-type TAppPrimaryButtonProps = Omit<ButtonProps, 'children'> & {
-  children?: ReactNode;
-  title: string;
-};
+import AppText from './AppText';
 
-type TAppSecondaryButtonProps = Omit<ButtonProps, 'children'> & {
-  children?: ReactNode;
-  title: string;
-};
-
-type TAppLottieButton = TouchableOpacityProps &
-  LottieViewProps & {
-    children?: ReactNode;
-    initState: boolean;
-    onStateTime: number;
-    offStateTime: number;
-    containerStyle?: StyleSheetProperties;
-  };
-
-export function AppPrimaryButton({
-  title,
-  style,
-  ...rest
-}: TAppPrimaryButtonProps) {
-  return (
-    <Button style={[styles.buttonContainer, style]} {...rest}>
-      <Text>{title}</Text>
-    </Button>
-  );
+enum EAppButtonType {
+  PRIMARY = 'PRIMARY',
+  SECONDARY = 'SECONDARY',
 }
 
-export function AppSecondaryButton({
-  title,
-  style,
-  ...rest
-}: TAppSecondaryButtonProps) {
-  return (
-    <Button style={[styles.buttonContainer, style]} {...rest}>
-      <Text>{title}</Text>
-    </Button>
-  );
-}
+type TAppButtonProps = Omit<TouchableOpacityProps, 'children'> & {
+  title: string;
+  type?: EAppButtonType;
+  containerStyle?: ViewStyle;
+  textStyle?: TextStyle;
+  left?: ReactNode;
+  right?: ReactNode;
+};
 
-export function AppLottieButton({
-  source,
-  initState,
+export function AppButton({
+  title,
   containerStyle,
-  style,
+  textStyle,
+  onPress,
+  type = EAppButtonType.PRIMARY,
+  left,
+  right,
   ...rest
-}: TAppLottieButton) {
-  const animationRef = useRef<LottieView>(null);
-  const isRistRunRef = useRef(true);
-
-  const [state, setState] = useState<boolean>(initState);
-
-  useEffect(() => {
-    setState(initState);
-  }, [initState]);
-
-  useEffect(() => {
-    if (isRistRunRef.current) {
-      if (state) {
-        animationRef.current?.play(66, 66);
-      } else {
-        animationRef.current?.play(19, 19);
-      }
-      isRistRunRef.current = false;
-    } else if (state) {
-      animationRef.current?.play(19, 50);
-    } else {
-      animationRef.current?.play(0, 19);
-    }
-  }, [state]);
-
+}: TAppButtonProps) {
   return (
     <TouchableOpacity
-      onPress={() => {
-        setState(!state);
-      }}
-      style={[styles.lottieContainer, containerStyle]}
+      onPress={onPress}
+      style={[
+        type === EAppButtonType.PRIMARY
+          ? styles.primaryButton
+          : styles.secondaryButton,
+        styles.container,
+        containerStyle,
+      ]}
       {...rest}>
-      <LottieView
-        loop={false}
-        autoPlay={false}
-        ref={animationRef}
-        source={source}
-        style={[styles.lottieStyle, style]}
-      />
+      {left && right}
+      <AppText
+        style={[
+          type === EAppButtonType.PRIMARY
+            ? styles.primaryText
+            : styles.secondaryText,
+          styles.text,
+          {...textStyle},
+        ]}>
+        {title}
+      </AppText>
+      {right && right}
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {},
-  lottieContainer: {},
-  lottieStyle: {},
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 40,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 24,
+  },
+  primaryText: {
+    color: 'white',
+  },
+  secondaryText: {
+    color: '#CB003D',
+  },
+  primaryButton: {
+    backgroundColor: '#CB003D',
+  },
+  secondaryButton: {
+    backgroundColor: 'white',
+    borderColor: '#CB003D',
+    borderWidth: 1,
+  },
 });

@@ -9,6 +9,7 @@ import Toast from 'react-native-toast-message';
 import {persistor, store} from '@Store/index';
 import {APP_THEME} from '@Theme/AppTheme';
 import {AppInitContainer} from 'AppInitContainer.tsx';
+import TOAST_CONFIG from '@Utils/ToastConfig';
 import '@Translations/index';
 
 const queryClient = new QueryClient();
@@ -21,7 +22,7 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <BottomSheetModalProvider>
               <AppInitContainer />
-              <Toast />
+              <Toast config={TOAST_CONFIG} />
             </BottomSheetModalProvider>
           </QueryClientProvider>
         </PaperProvider>

@@ -1,39 +1,45 @@
-import {StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import React from 'react';
-import {ActivityIndicator, Button, Text} from 'react-native';
-// import DeviceSettingModule from 'react-native-device-setting';
+import {FormProvider, useForm} from 'react-hook-form';
 
-import {useAppDispatch, useAppSelector} from '@Hooks/Hooks';
-import {setDeviceToken} from '@Store/Slices/systemSlice';
+import AppTextInput from '@Components/AppTextInput';
+import AppDatePicker from '@Components/AppDatePicker';
 
 export function HomeScreen() {
-  const dispatch = useAppDispatch();
-  const {} = useAppSelector(state => state.system);
-
-  // DeviceSettingModule.useCompassListener(data => {
-  //   console.log({data});
-  // });
-
-  const fetchUser = () => {
-    dispatch(setDeviceToken(Math.random().toString()));
-  };
+  const form = useForm({
+    defaultValues: {},
+  });
 
   return (
-    <View style={styles.container}>
-      {/* <Button
-        title="Start"
-        onPress={() => {
-          DeviceSettingModule.startListeningCompass();
-        }}
-      />
+    <FormProvider {...form}>
+      <View style={styles.container}>
+        <AppTextInput
+          control={form.control}
+          secureTextEntry
+          label="Fullname"
+          required
+          name={'password'}
+          rules={{
+            required: 'Email is required.',
+            pattern: {
+              value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+              message: 'Email is not valid.',
+            },
+          }}
+        />
+        <AppDatePicker
+          control={form.control}
+          name="birthday"
+          label="Ngày sinh"
+        />
+      </View>
       <Button
-        title="Stop"
-        onPress={() => {
-          DeviceSettingModule.stopListeningCompass();
-        }}
-      /> */}
-      <Button title="Reload User" onPress={fetchUser} />
-    </View>
+        title="Submit"
+        onPress={form.handleSubmit(data => {
+          console.log({data});
+        })}
+      />
+    </FormProvider>
   );
 }
 

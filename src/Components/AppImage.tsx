@@ -10,6 +10,6 @@ export const RESIZE_MODE: Record<ResizeMode, ResizeMode> = {
   stretch: 'stretch',
 };
 
-export function AppImage({...rest}: TAppImageProps) {
+export default function AppImage({...rest}: TAppImageProps) {
   return <FastImage {...rest} />;
 }

@@ -11,11 +11,20 @@ import {ChatScreen} from '@Screens/ChatScreen/ChatScreen';
 import {MyPetsScreen} from '@Screens/MyPetsScreen/MyPetsScreen';
 import {SettingsScreen} from '@Screens/SettingsScreen/SettingsScreen';
 import {ExploreScreen} from '@Screens/ExploreScreen/ExploreScreen';
+import UserInfoEditScreen from '@Screens/UserInfoEditScreen/UserInfoEditScreen';
+import UserInfoScreen from '@Screens/UserInfoScreen/UserInfoScreen';
+import UserPasswordEditScreen from '@Screens/UserPasswordEditScreen/UserPasswordEditScreen';
+import UserLanguageScreen from '@Screens/UserLanguageScreen/UserLanguageScreen';
+import UserEmailEditScreen from '@Screens/UserEmailEditScreen/UserEmailEditScreen';
 
 const Stack = createNativeStackNavigator();
 
 const STACK_SCREEN_OPTIONS: NativeStackNavigationOptions = {
   headerShown: false,
+  headerStyle: {backgroundColor: '#cb002b'},
+  headerTitleStyle: {color: 'white'},
+  headerTitleAlign: 'center',
+  headerTintColor: 'white',
 };
 
 export function HomeStack() {
@@ -58,7 +67,41 @@ export function SettingsStack() {
   return (
     <Stack.Navigator screenOptions={STACK_SCREEN_OPTIONS}>
       <Stack.Screen name={SCREEN_KEYS.SETTINGS} component={SettingsScreen} />
-      <Stack.Screen name={SCREEN_KEYS.HELP} component={HelpScreen} />
+      <Stack.Screen
+        name={SCREEN_KEYS.USER_INFO}
+        component={UserInfoScreen}
+        options={{
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
+        name={SCREEN_KEYS.USER_INFO_EDIT}
+        component={UserInfoEditScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
+        name={SCREEN_KEYS.USER_PASSWORD_EDIT}
+        component={UserPasswordEditScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
+        name={SCREEN_KEYS.USER_EMAIL_EDIT}
+        component={UserEmailEditScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
+        name={SCREEN_KEYS.USER_LANGUAGE}
+        component={UserLanguageScreen}
+      />
     </Stack.Navigator>
   );
 }

@@ -6,11 +6,14 @@ import {StackActions, useNavigation} from '@react-navigation/native';
 
 import SCREEN_KEYS from '@Constants/screenKeys';
 import {useLocalization} from '@Translations/useLocalization';
-import {AppPrimaryButton} from '@Components/AppButton';
 
 export function LoginScreen() {
   const navigation = useNavigation();
-  const {translate, changeLanguage, currentLanguage} = useLocalization();
+  const {
+    translate,
+    // changeLanguage,
+    // currentLanguage
+  } = useLocalization();
 
   return (
     <View>
@@ -25,7 +28,7 @@ export function LoginScreen() {
       <View>
         <Text>{translate('common.today')}</Text>
         <Text>{dayjs().from(dayjs().subtract(2, 'minutes'))}</Text>
-        <AppPrimaryButton
+        {/* <AppPrimaryButton
           title={translate('common.change_language')}
           onPress={() => {
             if (currentLanguage === 'en') {
@@ -34,7 +37,7 @@ export function LoginScreen() {
             }
             changeLanguage('en');
           }}
-        />
+        /> */}
       </View>
     </View>
   );

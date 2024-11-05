@@ -1,7 +1,7 @@
 import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import React from 'react';
 
-export function AppLoading() {
+export default function AppLoading() {
   return (
     <View style={styles.container}>
       <ActivityIndicator size={'large'} />

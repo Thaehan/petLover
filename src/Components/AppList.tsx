@@ -4,12 +4,12 @@ import {
   RefreshControlProps,
   StyleSheet,
   View,
+  Text,
 } from 'react-native';
-import {Text} from 'react-native-paper';
 import {FlashList, FlashListProps} from '@shopify/flash-list';
 
+import AppLoading from './AppLoading';
 import {FONT_SIZE} from '@Theme/AppTheme';
-import {AppLoading} from './AppLoading';
 import {DEVICE_WIDTH} from '@Constants/commons';
 
 type TAppListProps<T> = FlashListProps<T> &
@@ -31,7 +31,7 @@ function ListEmptyComponent({title}: TListEmptyComponent) {
   );
 }
 
-export function AppList<T>({
+export default function AppList<T>({
   isLoading,
   renderItem,
   refreshing,
