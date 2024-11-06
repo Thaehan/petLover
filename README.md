@@ -1,25 +1,74 @@
-# Dự án Tìm danh sách tìm kiếm Momo ⭐️.
+# Base react-native application ⭐️.
 
 # Thông số môi trường 🔥:
 - JDK 17.
 - Node 18.
+- React Native 0.74.3
 
-# Chi tiết về bài toán 🔥:
-1. Phần yêu cầu kỹ thuật: Đã hoàn thành đầy đủ.
-2. Phần tính năng nâng cao:
-- Chi tiết về cách tối ưu phần trải nghiệm người dùng của chức năng tìm kiếm:
-   - Sử dụng kỹ thuật Debounce: Xử lý việc tìm kiếm sau khi người dùng ngừng nhập, giảm thiểu đáng kể số lượt tìm kiếm dư thừa.
-   - Tối ưu thuật toán tìm kiếm: Ý tưởng thuật toán (Chi tiết trong file Algorithm.ts): Gọi n là số lượng phần tử trong mảng, lặp qua mảng 1 lần để lọc những phần tử để lấy ra những phần tử phù hợp kèm theo là thông tin kết quả phù hợp nhất dựa trên thứ tự xuất hiện đầu tiên của query. Sau đó, chạy thêm một vòng lặp để có thể sort nhờ hàm sort trong js bằng việc so sánh phần tử được thêm vào. (Với phương pháp này, trường hợp xấu nhất xảy ra với độ phức tạp về thời gian là 0(2n) khi mà tất cả các phần tử trong mảng đều có số điện thoại hoặc tên trùng với query). Có một cách ngoài lề để có thể lấy được các phần tử với best case là O(1) và worst case là O(logN) đó là sử dụng HashedMap, tuy nhiên độ phức tạp về không gian quá lớn nên phương pháp này không khả thi.
-   - Sử dụng thư viện react-native-flash-list: Cho một hiệu năng tổng thể khi render danh sách cao hơn hiệu năng của Flatlist của ReactNative.
-   - Sử dụng thư viện react-native-fast-image: Cho một hiệu năng cao hơn Image của React Native với một số ảnh có kích thước lớn chẳng hạn.
-   - Sử dụng MMVK thay vì các storage khác để lưu trữ offline cho một hiệu năng rất cao, có thể chạy đồng bộ tác vụ được.
-- Implement cache: Sử dụng React-Query để cache và quản lý thời gian làm mới.
-- Hỗ trợ làm việc offline: Sử dụng MMKV-storage cho hiệu năng đọc ghi rất cao và React-Query hỗ trợ quản lý trạng thái sau với những lần fetch. Để đảm bảo dữ liệu offline luôn được mới nhất nhưng không tốn quá nhiều tài nguyên cho việc thực hiện lưu dữ liệu offline, em đã thực hiện: Sử dụng useQuery để gọi API -> với lần đầu tiên success hoặc những lần thực hiện refetch sẽ thực hiện thay đổi dữ liệu offline trong máy.
-- Hiển thị chỉ báo khi dữ liệu đang được tải: Em không hiểu yêu cầu của ý này lắm ạ.
-- Unit testing: Do việc tích hợp unit test với các thư viện khác khá mất thời gian nên em xin phép được bỏ qua ạ. Em có dự án đã viết Test cơ bản bằng Jest tại [Twitter Clone](https://github.com/Thaehan/Twitter-clone/tree/master/__test__).
-
+# Chi tiết 🔥:
+1. Project structure:
+```PlainText
+├── android: Thư mục quản lý source Android.
+├── ios: Thư mục quản lý source iOS.
+├── assets: Một số assets liên quan đến setup đặc thù của dự án (font, ...).
+├── modules: Các native modules được viết ở đây.
+└── src
+    ├── Api (Quản lý Api)
+    │   ├── index.ts: Implement axios instance cho các interceptors.
+    │   ├── AuthApi: Axios api để call cho module Auth.
+    │   ├── MeetApi: Axios api để call cho module Meeting.
+    │   └── ...
+    ├── Assets (Quản lý tài nguyên local)
+    │   ├── Images: Quản lý hình ảnh local của ứng dụng.
+    │   ├── Svgs: Quản lý hình ảnh svg của ứng dụng.
+    │   └── Lotties: Quản lý hình ảnh động lottie của ứng dụng.
+    ├── Components (Quản lý các component dùng chung)
+    │   ├── Button
+    │   ├── TextField
+    │   ├── Text
+    │   ├── DatePicker
+    │   ├── Icon
+    │   ├── ImageView
+    │   └── ...
+    ├── Constant (Các hằng số của ứng dụng)
+    │   ├── SreenKeys: Tên các màn hình.
+    │   ├── QueryKeys: Tên các Keys quản lý với Tanstack/query.
+    │   └── Commons: Các thông tin liên quan đến kích thước màn hình cùng các thiết lập mặc định của một số dịch vụ.
+    ├── Hooks: Các Hooks sử dụng chung cho nhiều trường hợp (VD: debounce, dispatch, focusScreen, ...)
+    ├── Navigations (Quản lý react-navigation)
+    │   ├── MainNavigator: Navigator khởi tạo.
+    │   ├── DrawerNavigator: Navigator cho Drawer.
+    │   ├── BottomNavigator: Navigator cho stack sau khi đăng nhập.
+    │   └── StackNavigator: Các StackNavigator cho từng BottomTab.
+    ├── Screens (Quản lý các màn hình, mỗi màn hình là một thư mục)
+    │   ├── Screen1
+    │   │   ├── Components: Các component riêng của màn hình được dựng trên Base Component.
+    │   │   ├── Services: Các hooks và modules xử lý dữ liệu.
+    │   │   └── Screen1.tsx: Export Component màn hình.
+    │   └── Screen2 ...
+    ├── Store (Quản lý redux)
+    │   ├── mmkvStorage
+    │   ├── index.ts: Setup store (redux, redux-persist, mmkv, middleWares).
+    │   ├── Sagas: sagas.
+    │   └── Slices: Các slices sử dụng toolkits.
+    ├── Theme (Quản lý cài đặt theme)
+    ├── Translation (Quản lý đa ngôn ngữ)
+    │   ├── Localization: Cài đặt định dạng ngày tháng của vùng miền với dayjs.
+    │   └── Languages: Cài đặt ngôn ngữ với i18n.
+    └── Utils (Quản lý khai báo các hàm dùng chung, các dạng convert phổ biến).
+```
+3. Chi tiết các công nghệ sử dụng:
+- MMKV storage: Một dạng LocalStorage nhanh hơn, mạnh hơn AsyncStorage tới nghìn lần. Cùng với việc có thể kết hợp với redux tạo ra một bộ công cụ mạnh mẽ quản lý trạng thái.
+- Tanstack/Query: Một thư viện quản lý trạng thái bất đồng bộ xử lý đặc thù cho fetchApi kết hợp cùng axios.
+- React Native Bottom Sheet: Thư viện quản lý bottom sheet hiệu quả thay vì các Modal truyền thống.
+- Lottie React Native: Thư viện chạy loạt ảnh animation dựa trên bộ thư viện Lottie.
+- Shopify/Flashlist: Thư viện render các list một cách hiệu quả.
+- Việc triển khai theo mô hình module sẽ đóng gói các các phần, hạn chế tối đa sự liên quan giữa các module, tách biệt riêng rẽ, rõ ràng giữa các phần.
+- Sử dụng kiến trúc Model-View-ViewModel cho triển khai các màn hình để tối ưu khả năng đọc hiểu của code.
+4. Tham chiếu:
+- [Functional Programming](https://www.geeksforgeeks.org/functional-programming-paradigm)
+- [MMKV storage](https://github.com/mrousavy/react-native-mmkv)
+- [Tanstack/query](https://tanstack.com/query/latest/docs/framework/react/overview)
+- [Model-View-ViewModel](https://learn.microsoft.com/en-us/dotnet/architecture/maui/mvvm)
 # Lời cảm ơn 🙇‍♂️:
-
-Xin phép em được gửi đến đội ngũ tuyển dụng của Momo và đặc biệt là các tiền bối đi trước một lời cảm ơn trân trọng nhất. Bài toán trên là một bài toán thông dụng, được sử dụng trong nhiều trường hợp thực tiễn. Em xin chân thành cảm ơn các anh đã gửi đến em một bài toán rất hay ạ.
-
-Em xin chân thành cảm ơn!
+Em xin chân thành cảm ơn anh đã bỏ thời gian quan tâm đến project này. Em hy vọng rằng với kiến thức và kinh nghiệm em tích luỹ được sẽ giúp ích cho dự án sắp tới của mình.
