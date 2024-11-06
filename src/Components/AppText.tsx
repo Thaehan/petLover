@@ -1,13 +1,17 @@
-import {StyleSheet, Text, TextStyle} from 'react-native';
+import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from 'react-native';
 import React from 'react';
 
 export type TAppText = {
-  children: string;
-  style?: TextStyle | TextStyle[];
-};
+  children: any;
+  style?: StyleProp<TextStyle>;
+} & TextProps;
 
-export default function AppText({children, style}: TAppText) {
-  return <Text style={[styles.default, style]}>{children}</Text>;
+export default function AppText({children, style, ...rest}: TAppText) {
+  return (
+    <Text style={[styles.default, style]} {...rest}>
+      {children}
+    </Text>
+  );
 }
 
 const styles = StyleSheet.create({

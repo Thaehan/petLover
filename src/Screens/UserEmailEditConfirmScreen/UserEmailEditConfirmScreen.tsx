@@ -1,31 +1,25 @@
-import {ScrollView, StyleSheet} from 'react-native';
 import React from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
 
-import AppText from '@Components/AppText';
+import EmailConfirmHeader from './Components/EmailConfirmHeader';
+import EmailConfirmOtpField from './Components/EmailConfirmOtpField';
+import EmailConfirmButtons from './Components/EmailConfirmButtons';
+import AppScreenContainer from '@Components/AppScreenContainer';
 
 export default function UserEmailEditConfirmScreen() {
   const form = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      otp: '',
     },
   });
 
   return (
     <FormProvider {...form}>
-      <ScrollView style={styles.buttonContainer}>
-        <AppText>UserEmailEditConfirmScreen</AppText>
-      </ScrollView>
+      <AppScreenContainer>
+        <EmailConfirmHeader />
+        <EmailConfirmOtpField />
+        <EmailConfirmButtons />
+      </AppScreenContainer>
     </FormProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    width: '90%',
-    alignSelf: 'center',
-    paddingVertical: 8,
-    marginTop: 16,
-  },
-});

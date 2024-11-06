@@ -31,7 +31,9 @@ export default function useUserSettings() {
       {
         label: 'Thông tin về Viettel Meeting',
         showNextIcon: true,
-        onPress: () => {},
+        onPress: () => {
+          navigation.dispatch(StackActions.push(SCREEN_KEYS.APP_INFORMATION));
+        },
       },
       {
         label: 'Liên hệ hỗ trợ',

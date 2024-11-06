@@ -16,6 +16,8 @@ import UserInfoScreen from '@Screens/UserInfoScreen/UserInfoScreen';
 import UserPasswordEditScreen from '@Screens/UserPasswordEditScreen/UserPasswordEditScreen';
 import UserLanguageScreen from '@Screens/UserLanguageScreen/UserLanguageScreen';
 import UserEmailEditScreen from '@Screens/UserEmailEditScreen/UserEmailEditScreen';
+import UserEmailEditConfirmScreen from '@Screens/UserEmailEditConfirmScreen/UserEmailEditConfirmScreen';
+import AppInformationScreen from '@Screens/AppInformationScreen/AppInformationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -99,8 +101,22 @@ export function SettingsStack() {
         options={{
           headerShown: true,
         }}
+        name={SCREEN_KEYS.USER_EMAIL_EDIT_CONFIRM}
+        component={UserEmailEditConfirmScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
         name={SCREEN_KEYS.USER_LANGUAGE}
         component={UserLanguageScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
+        name={SCREEN_KEYS.APP_INFORMATION}
+        component={AppInformationScreen}
       />
     </Stack.Navigator>
   );

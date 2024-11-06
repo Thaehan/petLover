@@ -1,16 +1,16 @@
-import Toast from 'react-native-toast-message';
-import {useNavigation} from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
+import SCREEN_KEYS from '@Constants/screenKeys';
 
 export default function useEditEmail() {
   const navigation = useNavigation();
 
   const onSubmitEditPassword = (data: any) => {
     console.log({data});
-    navigation.goBack();
-    Toast.show({
-      type: 'success',
-      text1: 'Cập nhật Email thành công!',
-    });
+    if (data) {
+      navigation.dispatch(
+        StackActions.push(SCREEN_KEYS.USER_EMAIL_EDIT_CONFIRM),
+      );
+    }
   };
 
   return {

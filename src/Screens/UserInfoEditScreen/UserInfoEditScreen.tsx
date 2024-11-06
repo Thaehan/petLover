@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {FormProvider, useForm} from 'react-hook-form';
 
 import AppRadioSelect from '@Components/AppRadioSelect';
@@ -7,6 +7,7 @@ import {AppTextInput} from '@Components/AppTextInput';
 import AppDatePicker from '@Components/AppDatePicker';
 import {AppButton} from '@Components/AppButton';
 import useUserInfoEdit from './Services/useUserInfoEdit';
+import AppScreenContainer from '@Components/AppScreenContainer';
 
 export default function UserInfoEditScreen() {
   const {genderOptions, onSubmitEditInfo} = useUserInfoEdit();
@@ -22,7 +23,7 @@ export default function UserInfoEditScreen() {
 
   return (
     <FormProvider {...form}>
-      <ScrollView>
+      <AppScreenContainer>
         <AppTextInput
           control={form.control}
           name="name"
@@ -35,6 +36,7 @@ export default function UserInfoEditScreen() {
               message: 'Tên có độ dài tối đa là 64 ký tự',
             },
           }}
+          placeholder="Nhập tên của bạn"
         />
         <AppTextInput
           control={form.control}
@@ -48,6 +50,7 @@ export default function UserInfoEditScreen() {
               message: 'Tên hiển thị có độ dài tối đa là 64 ký tự',
             },
           }}
+          placeholder="Nhập tên hiển thị"
         />
         <AppDatePicker
           control={form.control}
@@ -65,7 +68,7 @@ export default function UserInfoEditScreen() {
           containerStyle={styles.buttonContainer}
           onPress={form.handleSubmit(onSubmitEditInfo)}
         />
-      </ScrollView>
+      </AppScreenContainer>
     </FormProvider>
   );
 }

@@ -9,14 +9,9 @@ import {
 
 import AppText from './AppText';
 
-enum EAppButtonType {
-  PRIMARY = 'PRIMARY',
-  SECONDARY = 'SECONDARY',
-}
-
-type TAppButtonProps = Omit<TouchableOpacityProps, 'children'> & {
+type TAppButtonProps = Omit<TouchableOpacityProps, 'children' | 'style'> & {
   title: string;
-  type?: EAppButtonType;
+  type?: 'primary' | 'secondary';
   containerStyle?: ViewStyle;
   textStyle?: TextStyle;
   left?: ReactNode;
@@ -28,28 +23,30 @@ export function AppButton({
   containerStyle,
   textStyle,
   onPress,
-  type = EAppButtonType.PRIMARY,
+  type = 'primary',
   left,
   right,
+  disabled,
   ...rest
 }: TAppButtonProps) {
   return (
     <TouchableOpacity
+      disabled={disabled}
       onPress={onPress}
       style={[
-        type === EAppButtonType.PRIMARY
-          ? styles.primaryButton
-          : styles.secondaryButton,
+        type === 'primary' ? styles.primaryButton : styles.secondaryButton,
+        disabled && type === 'primary' && styles.disabledPrimaryButton,
+        disabled && type === 'secondary' && styles.disabledSecondaryButton,
         styles.container,
         containerStyle,
       ]}
       {...rest}>
-      {left && right}
+      {left && left}
       <AppText
         style={[
-          type === EAppButtonType.PRIMARY
-            ? styles.primaryText
-            : styles.secondaryText,
+          type === 'primary' ? styles.primaryText : styles.secondaryText,
+          disabled && type === 'primary' && styles.disabledPrimaryText,
+          disabled && type === 'secondary' && styles.disabledSecondaryText,
           styles.text,
           {...textStyle},
         ]}>
@@ -78,6 +75,12 @@ const styles = StyleSheet.create({
   secondaryText: {
     color: '#CB003D',
   },
+  disabledPrimaryText: {
+    color: '#8F9294',
+  },
+  disabledSecondaryText: {
+    color: '#8F9294',
+  },
   primaryButton: {
     backgroundColor: '#CB003D',
   },
@@ -85,5 +88,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: '#CB003D',
     borderWidth: 1,
+  },
+  disabledPrimaryButton: {
+    backgroundColor: '#8F929452',
+  },
+  disabledSecondaryButton: {
+    backgroundColor: 'white',
+    borderColor: '#44494D',
   },
 });

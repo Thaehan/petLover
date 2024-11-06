@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // backgroundColor: 'white',
+    backgroundColor: 'white',
     borderColor: VIETTEL_GRAY_01,
     paddingHorizontal: 12,
     marginHorizontal: 8,

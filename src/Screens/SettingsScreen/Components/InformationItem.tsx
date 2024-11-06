@@ -4,6 +4,10 @@ import {
   ViewStyle,
   TouchableOpacity,
   TextStyle,
+  Image,
+  ImageProps,
+  StyleProp,
+  TextProps,
 } from 'react-native';
 import React from 'react';
 
@@ -14,13 +18,16 @@ const TEXT_COLOR = '#44494D';
 
 export type TInformationItem = {
   label: string;
-  labelStyle?: TextStyle;
+  labelStyle?: StyleProp<TextStyle>;
   detailInformation?: string;
   detailInformationStyle?: TextStyle;
+  detailInformationTextProps?: TextProps;
+  detailInformationImage?: ImageProps;
   onPress?: () => void;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   showNextIcon?: boolean;
   reverseStyle?: boolean;
+  rightPartStyle?: StyleProp<ViewStyle>;
 };
 
 export default function InformationItem({
@@ -28,10 +35,13 @@ export default function InformationItem({
   labelStyle,
   detailInformation,
   detailInformationStyle,
+  detailInformationTextProps,
+  detailInformationImage,
   onPress,
   style,
   showNextIcon,
   reverseStyle,
+  rightPartStyle,
 }: TInformationItem) {
   return (
     <TouchableOpacity
@@ -41,20 +51,22 @@ export default function InformationItem({
       <AppText
         style={[
           reverseStyle ? styles.detailInformation : styles.labelStyle,
-          {...labelStyle},
+          labelStyle,
         ]}>
         {label}
       </AppText>
-      <View style={styles.rightPart}>
+      <View style={[styles.rightPart, rightPartStyle]}>
         {detailInformation && (
           <AppText
             style={[
               reverseStyle ? styles.labelStyle : styles.detailInformation,
-              {...detailInformationStyle},
-            ]}>
+              detailInformationStyle,
+            ]}
+            {...detailInformationTextProps}>
             {detailInformation}
           </AppText>
         )}
+        {detailInformationImage && <Image {...detailInformationImage} />}
         {showNextIcon && (
           <AppIcon
             color={TEXT_COLOR}

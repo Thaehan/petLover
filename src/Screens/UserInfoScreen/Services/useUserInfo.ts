@@ -1,20 +1,44 @@
+import {useRef} from 'react';
 import SCREEN_KEYS from '@Constants/screenKeys';
 import {StackActions, useNavigation} from '@react-navigation/native';
 
 import {TInformationGroup} from '@Screens/SettingsScreen/Components/InformationGroup';
+import {TAppImageViewRef} from '@Components/AppImageView';
 
 export default function useUserInfo() {
+  const imageViewRef = useRef<TAppImageViewRef>(null);
   const navigation = useNavigation();
+  const avatars = require('@Assets/Images/logo.png');
 
+  const avatarGroup: TInformationGroup = {
+    items: [
+      {
+        label: 'Ảnh đại diện',
+        detailInformationImage: {
+          source: require('@Assets/Images/logo.png'),
+          style: {
+            height: 30,
+            width: 30,
+          },
+        },
+        showNextIcon: true,
+        onPress: () => {
+          imageViewRef.current?.openImage();
+        },
+      },
+    ],
+  };
   const userInfoGroup: TInformationGroup = {
     items: [
       {
         label: 'Tên đầy đủ',
-        detailInformation: 'Nguyễn Thị Ngọc Trang',
+        detailInformation: 'Nguyễn Thị Ngọc Trangggggg',
+        rightPartStyle: {maxWidth: '70%'},
       },
       {
         label: 'Tên hiển thị',
         detailInformation: 'Trang Nguyễn',
+        rightPartStyle: {maxWidth: '70%'},
       },
       {
         label: 'Ngày sinh',
@@ -37,11 +61,14 @@ export default function useUserInfo() {
     items: [
       {
         label: 'Tên đăng nhập',
-        detailInformation: 'Nguyễn Thị Ngọc Trang',
+        detailInformation: 'Nguyễn Thị Ngọc Trangggg',
+        rightPartStyle: {maxWidth: '65%'},
       },
       {
         label: 'Email',
-        detailInformation: 'trangntn1234@viettel.com.vn',
+        detailInformation: 'trangntn1234@viettel.com.vndfff',
+        detailInformationTextProps: {numberOfLines: 1},
+        rightPartStyle: {maxWidth: '76%'},
         showNextIcon: true,
         onPress: () => {
           navigation.dispatch(StackActions.push(SCREEN_KEYS.USER_EMAIL_EDIT));
@@ -64,6 +91,8 @@ export default function useUserInfo() {
       {
         label: 'Tài khoản liên kết',
         detailInformation: 'Email, Google, Viettel Cloud',
+        rightPartStyle: {maxWidth: '60%'},
+        labelStyle: {alignSelf: 'flex-start'},
       },
     ],
     label: 'Thông tin đăng nhập',
@@ -95,9 +124,12 @@ export default function useUserInfo() {
   };
 
   return {
+    avatarGroup,
     userInfoGroup,
     loginGroup,
     registrationGroup,
     additionalRegistrationGroup,
+    avatars,
+    imageViewRef,
   };
 }
