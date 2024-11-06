@@ -57,7 +57,7 @@
     │   └── Languages: Cài đặt ngôn ngữ với i18n.
     └── Utils (Quản lý khai báo các hàm dùng chung, các dạng convert phổ biến).
 ```
-3. Chi tiết các công nghệ sử dụng:
+2. Chi tiết các công nghệ sử dụng:
 - MMKV storage: Một dạng LocalStorage nhanh hơn, mạnh hơn AsyncStorage tới nghìn lần. Cùng với việc có thể kết hợp với redux tạo ra một bộ công cụ mạnh mẽ quản lý trạng thái.
 - Tanstack/Query: Một thư viện quản lý trạng thái bất đồng bộ xử lý đặc thù cho fetchApi kết hợp cùng axios.
 - React Native Bottom Sheet: Thư viện quản lý bottom sheet hiệu quả thay vì các Modal truyền thống.
@@ -65,7 +65,7 @@
 - Shopify/Flashlist: Thư viện render các list một cách hiệu quả.
 - Việc triển khai theo mô hình module sẽ đóng gói các các phần, hạn chế tối đa sự liên quan giữa các module, tách biệt riêng rẽ, rõ ràng giữa các phần.
 - Sử dụng kiến trúc Model-View-ViewModel cho triển khai các màn hình để tối ưu khả năng đọc hiểu của code.
-4. Tham chiếu:
+3. Tham chiếu:
 - [Functional Programming](https://www.geeksforgeeks.org/functional-programming-paradigm)
 - [MMKV storage](https://github.com/mrousavy/react-native-mmkv)
 - [Tanstack/query](https://tanstack.com/query/latest/docs/framework/react/overview)
