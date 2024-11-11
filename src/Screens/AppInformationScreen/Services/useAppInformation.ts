@@ -1,6 +1,11 @@
+import SCREEN_KEYS from '@Constants/screenKeys';
+import {StackActions, useNavigation} from '@react-navigation/native';
+
 import {TInformationGroup} from '@Screens/SettingsScreen/Components/InformationGroup';
 
 export default function useAppInformation() {
+  const navigation = useNavigation();
+
   const infoGroup: TInformationGroup = {
     items: [
       {
@@ -14,7 +19,9 @@ export default function useAppInformation() {
       {
         label: 'Gửi phản hồi',
         showNextIcon: true,
-        onPress: () => {},
+        onPress: () => {
+          navigation.dispatch(StackActions.push(SCREEN_KEYS.FEEDBACK));
+        },
       },
     ],
   };

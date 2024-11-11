@@ -3,11 +3,11 @@ import {StyleSheet} from 'react-native';
 import {FormProvider, useForm} from 'react-hook-form';
 
 import AppRadioSelect from '@Components/AppRadioSelect';
-import {AppTextInput} from '@Components/AppTextInput';
+import AppTextInput from '@Components/AppTextInput';
 import AppDatePicker from '@Components/AppDatePicker';
-import {AppButton} from '@Components/AppButton';
-import useUserInfoEdit from './Services/useUserInfoEdit';
+import AppButton from '@Components/AppButton';
 import AppScreenContainer from '@Components/AppScreenContainer';
+import useUserInfoEdit from './Services/useUserInfoEdit';
 
 export default function UserInfoEditScreen() {
   const {genderOptions, onSubmitEditInfo} = useUserInfoEdit();
@@ -37,6 +37,7 @@ export default function UserInfoEditScreen() {
             },
           }}
           placeholder="Nhập tên của bạn"
+          autoFocus
         />
         <AppTextInput
           control={form.control}

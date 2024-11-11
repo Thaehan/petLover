@@ -1,6 +1,7 @@
 import {useRef} from 'react';
 import SCREEN_KEYS from '@Constants/screenKeys';
 import {StackActions, useNavigation} from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 import {TInformationGroup} from '@Screens/SettingsScreen/Components/InformationGroup';
 import {TAppImageViewRef} from '@Components/AppImageView';
@@ -34,11 +35,13 @@ export default function useUserInfo() {
         label: 'Tên đầy đủ',
         detailInformation: 'Nguyễn Thị Ngọc Trangggggg',
         rightPartStyle: {maxWidth: '70%'},
+        labelStyle: {alignSelf: 'flex-start'},
       },
       {
         label: 'Tên hiển thị',
         detailInformation: 'Trang Nguyễn',
         rightPartStyle: {maxWidth: '70%'},
+        labelStyle: {alignSelf: 'flex-start'},
       },
       {
         label: 'Ngày sinh',
@@ -63,15 +66,21 @@ export default function useUserInfo() {
         label: 'Tên đăng nhập',
         detailInformation: 'Nguyễn Thị Ngọc Trangggg',
         rightPartStyle: {maxWidth: '65%'},
+        labelStyle: {alignSelf: 'flex-start'},
       },
       {
         label: 'Email',
-        detailInformation: 'trangntn1234@viettel.com.vndfff',
+        detailInformation: 'trangntn1234@viettel.comdasdasdasd.vndfff',
         detailInformationTextProps: {numberOfLines: 1},
         rightPartStyle: {maxWidth: '76%'},
         showNextIcon: true,
         onPress: () => {
           navigation.dispatch(StackActions.push(SCREEN_KEYS.USER_EMAIL_EDIT));
+        },
+        onLongPress: () => {
+          Toast.show({
+            text2: 'trangntn1234@viettel.comdasdasdasd.vndfff',
+          });
         },
       },
       {
@@ -102,8 +111,13 @@ export default function useUserInfo() {
     items: [
       {
         label: 'Cơ bản',
-        detailInformation: 'Hiệu lực đến: 10/10/2025',
+        detailInformation: 'Đến: 10/10/2025',
         reverseStyle: true,
+        onPress: () => {
+          Toast.show({
+            text2: 'Gói Cơ bản sẽ hết hạn vào 10/10/2025',
+          });
+        },
       },
     ],
   };
@@ -112,13 +126,23 @@ export default function useUserInfo() {
     items: [
       {
         label: 'Data 1G',
-        detailInformation: 'Hiệu lực đến: 10/10/2025',
+        detailInformation: 'Đến: 10/10/2025',
         reverseStyle: true,
+        onPress: () => {
+          Toast.show({
+            text2: 'Gói Data 1G sẽ hết hạn vào 10/10/2025',
+          });
+        },
       },
       {
         label: 'VCONFERENCE',
-        detailInformation: 'Hiệu lực đến: 10/10/2025',
+        detailInformation: 'Đến: 10/10/2025',
         reverseStyle: true,
+        onPress: () => {
+          Toast.show({
+            text2: 'Gói VCONFERENCE sẽ hết hạn vào 10/10/2025',
+          });
+        },
       },
     ],
   };

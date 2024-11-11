@@ -15,7 +15,8 @@ export default function AppScreenContainer({
   return (
     <ScrollView
       style={style}
-      contentContainerStyle={[styles.container, containerStyle]}>
+      contentContainerStyle={[styles.container, containerStyle]}
+      keyboardShouldPersistTaps="handled">
       {children}
     </ScrollView>
   );

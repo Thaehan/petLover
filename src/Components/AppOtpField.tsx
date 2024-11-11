@@ -68,6 +68,7 @@ export default function AppOtpField({
             .fill('')
             .map((_, index) => (
               <TextInput
+                autoFocus={index === 0}
                 key={index}
                 ref={ref => (inputs.current[index] = ref)}
                 style={[

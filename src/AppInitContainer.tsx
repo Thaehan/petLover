@@ -28,7 +28,11 @@ export function AppInitContainer() {
   };
 
   return (
-    <NavigationContainer onReady={onReady}>
+    <NavigationContainer
+      onReady={onReady}
+      onStateChange={state => {
+        console.log(state?.routes);
+      }}>
       <MainStackNavigator />
     </NavigationContainer>
   );

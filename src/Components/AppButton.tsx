@@ -10,7 +10,7 @@ import {
 import AppText from './AppText';
 
 type TAppButtonProps = Omit<TouchableOpacityProps, 'children' | 'style'> & {
-  title: string;
+  title?: string;
   type?: 'primary' | 'secondary';
   containerStyle?: ViewStyle;
   textStyle?: TextStyle;
@@ -18,7 +18,7 @@ type TAppButtonProps = Omit<TouchableOpacityProps, 'children' | 'style'> & {
   right?: ReactNode;
 };
 
-export function AppButton({
+export default function AppButton({
   title,
   containerStyle,
   textStyle,
@@ -42,16 +42,18 @@ export function AppButton({
       ]}
       {...rest}>
       {left && left}
-      <AppText
-        style={[
-          type === 'primary' ? styles.primaryText : styles.secondaryText,
-          disabled && type === 'primary' && styles.disabledPrimaryText,
-          disabled && type === 'secondary' && styles.disabledSecondaryText,
-          styles.text,
-          {...textStyle},
-        ]}>
-        {title}
-      </AppText>
+      {title && (
+        <AppText
+          style={[
+            type === 'primary' ? styles.primaryText : styles.secondaryText,
+            disabled && type === 'primary' && styles.disabledPrimaryText,
+            disabled && type === 'secondary' && styles.disabledSecondaryText,
+            styles.text,
+            {...textStyle},
+          ]}>
+          {title}
+        </AppText>
+      )}
       {right && right}
     </TouchableOpacity>
   );
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     color: '#8F9294',
   },
   primaryButton: {
-    backgroundColor: '#CB003D',
+    backgroundColor: '#CB002B',
   },
   secondaryButton: {
     backgroundColor: 'white',

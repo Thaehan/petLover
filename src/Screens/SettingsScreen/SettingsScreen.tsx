@@ -5,7 +5,7 @@ import InformationGroup from './Components/InformationGroup';
 import InformationCenterDetail from './Components/InformationCenterDetail';
 import AppScreenContainer from '@Components/AppScreenContainer';
 
-export function SettingsScreen() {
+export default function SettingsScreen() {
   const {appInfoGroup, functionalGroup, userInfoGroup} = useUserSettings();
 
   return (

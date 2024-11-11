@@ -1,7 +1,7 @@
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 
-import {AppButton} from '@Components/AppButton';
+import AppButton from '@Components/AppButton';
 
 export default function EmailConfirmButtons() {
   return (

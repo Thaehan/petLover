@@ -5,12 +5,8 @@ import {
 } from '@react-navigation/native-stack';
 
 import SCREEN_KEYS from '@Constants/screenKeys';
-import {HelpScreen} from '@Screens/HelpScreen/HelpScreen';
-import {HomeScreen} from '@Screens/HomeScreen/HomeScreen';
-import {ChatScreen} from '@Screens/ChatScreen/ChatScreen';
-import {MyPetsScreen} from '@Screens/MyPetsScreen/MyPetsScreen';
-import {SettingsScreen} from '@Screens/SettingsScreen/SettingsScreen';
-import {ExploreScreen} from '@Screens/ExploreScreen/ExploreScreen';
+import HomeScreen from '@Screens/HomeScreen/HomeScreen';
+import SettingsScreen from '@Screens/SettingsScreen/SettingsScreen';
 import UserInfoEditScreen from '@Screens/UserInfoEditScreen/UserInfoEditScreen';
 import UserInfoScreen from '@Screens/UserInfoScreen/UserInfoScreen';
 import UserPasswordEditScreen from '@Screens/UserPasswordEditScreen/UserPasswordEditScreen';
@@ -18,6 +14,8 @@ import UserLanguageScreen from '@Screens/UserLanguageScreen/UserLanguageScreen';
 import UserEmailEditScreen from '@Screens/UserEmailEditScreen/UserEmailEditScreen';
 import UserEmailEditConfirmScreen from '@Screens/UserEmailEditConfirmScreen/UserEmailEditConfirmScreen';
 import AppInformationScreen from '@Screens/AppInformationScreen/AppInformationScreen';
+import FeedbackScreen from '@Screens/FeedbackScreen/FeedbackScreen';
+import NotificationScreen from '@Screens/NotificationScreen/NotificationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,34 +31,17 @@ export function HomeStack() {
   return (
     <Stack.Navigator screenOptions={STACK_SCREEN_OPTIONS}>
       <Stack.Screen name={SCREEN_KEYS.HOME} component={HomeScreen} />
-      <Stack.Screen name={SCREEN_KEYS.HELP} component={HelpScreen} />
     </Stack.Navigator>
   );
 }
 
-export function ExploreStack() {
+export function NotificationStack() {
   return (
     <Stack.Navigator screenOptions={STACK_SCREEN_OPTIONS}>
-      <Stack.Screen name={SCREEN_KEYS.EXPLORE} component={ExploreScreen} />
-      <Stack.Screen name={SCREEN_KEYS.HELP} component={HelpScreen} />
-    </Stack.Navigator>
-  );
-}
-
-export function ChatStack() {
-  return (
-    <Stack.Navigator screenOptions={STACK_SCREEN_OPTIONS}>
-      <Stack.Screen name={SCREEN_KEYS.CHAT} component={ChatScreen} />
-      <Stack.Screen name={SCREEN_KEYS.HELP} component={HelpScreen} />
-    </Stack.Navigator>
-  );
-}
-
-export function MyPetsStack() {
-  return (
-    <Stack.Navigator screenOptions={STACK_SCREEN_OPTIONS}>
-      <Stack.Screen name={SCREEN_KEYS.MY_PET} component={MyPetsScreen} />
-      <Stack.Screen name={SCREEN_KEYS.HELP} component={HelpScreen} />
+      <Stack.Screen
+        name={SCREEN_KEYS.NOTIFICATION}
+        component={NotificationScreen}
+      />
     </Stack.Navigator>
   );
 }
@@ -117,6 +98,13 @@ export function SettingsStack() {
         }}
         name={SCREEN_KEYS.APP_INFORMATION}
         component={AppInformationScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
+        name={SCREEN_KEYS.FEEDBACK}
+        component={FeedbackScreen}
       />
     </Stack.Navigator>
   );

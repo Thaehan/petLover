@@ -3,7 +3,7 @@ import React from 'react';
 
 import {TContact} from '@Api/ContactApi';
 import {BORDER, getCurrentSize, PADDING_SIZE} from '@Theme/AppTheme';
-import {AppLottieButton} from '@Components/AppButton';
+import AppLottieButton from '@Components/AppButton';
 import {AppImage, RESIZE_MODE} from '@Components/AppImage';
 
 type TSearchItemProps = {

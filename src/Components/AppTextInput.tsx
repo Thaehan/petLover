@@ -5,17 +5,19 @@ import {
   TextInput,
   TextInputProps,
   Text,
+  Keyboard,
 } from 'react-native';
-import React, {forwardRef, ReactElement, Ref, useRef, useState} from 'react';
+import React, {
+  forwardRef,
+  ReactElement,
+  Ref,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import AppIcon from './AppIcon';
 import {Control, Controller, RegisterOptions} from 'react-hook-form';
-
-const VIETTEL_GRAY_01 = '#44494D';
-const FOCUS_TEXT_COLOR = '#EF929C';
-const ERROR_INLINE_COLOR = '#B3261E';
-const ICON_COLOR = '#73777A';
-const REQUIRED_STAR_COLOR = '#EE0033';
 
 type TAppTextInput = {
   containerStyle?: ViewStyle;
@@ -30,9 +32,10 @@ type TAppTextInput = {
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
   initialValue?: string;
+  hideClearButton?: boolean;
 } & TextInputProps;
 
-export function AppTextInput(
+function AppTextInput(
   {
     containerStyle,
     style,
@@ -43,6 +46,7 @@ export function AppTextInput(
     control,
     name,
     rules = {},
+    hideClearButton,
     ...rest
   }: TAppTextInput,
   _currentRef: Ref<any>,
@@ -50,6 +54,15 @@ export function AppTextInput(
   const ref = useRef<TextInput>(null);
   const [showPassword, setShowPassword] = useState(secureTextEntry);
   const [isFocus, setIsFocus] = useState(false);
+
+  useEffect(() => {
+    // Override the default keyboard dismissal when clicking outside TextInput
+    const keyboardListener = Keyboard.addListener('keyboardWillHide', () => {});
+
+    return () => {
+      keyboardListener.remove(); // Cleanup listener on component unmount
+    };
+  }, []);
 
   return (
     <Controller
@@ -66,7 +79,7 @@ export function AppTextInput(
 
           return (
             <AppIcon
-              color={ICON_COLOR}
+              color={'#73777A'}
               size={24}
               name={showPassword ? 'eye-off-outline' : 'eye-outline'}
               onPress={() => {
@@ -78,13 +91,13 @@ export function AppTextInput(
         };
 
         const renderClear = () => {
-          if (isEmpty) {
+          if (isEmpty || hideClearButton) {
             return null;
           }
 
           return (
             <AppIcon
-              color={ICON_COLOR}
+              color={'#73777A'}
               size={16}
               type="Octicons"
               name={'x-circle-fill'}
@@ -109,17 +122,17 @@ export function AppTextInput(
 
         const getInputFieldStyle = () => {
           const inputStyle = {
-            borderColor: VIETTEL_GRAY_01,
+            borderColor: containerStyle?.borderColor ?? '#44494D',
             borderWidth: 1,
           };
 
           if (isFocus) {
-            inputStyle.borderColor = FOCUS_TEXT_COLOR;
+            inputStyle.borderColor = '#EF929C';
             inputStyle.borderWidth = 2;
           }
 
           if (error) {
-            inputStyle.borderColor = ERROR_INLINE_COLOR;
+            inputStyle.borderColor = '#B3261E';
           }
 
           return inputStyle;
@@ -134,7 +147,7 @@ export function AppTextInput(
                 containerStyle,
                 getInputFieldStyle(),
               ]}>
-              {left}
+              {left && <View style={styles.left}>{left}</View>}
               <TextInput
                 blurOnSubmit
                 ref={ref}
@@ -149,6 +162,7 @@ export function AppTextInput(
                 onChangeText={onChange}
                 style={[styles.textInput, style]}
                 secureTextEntry={showPassword}
+                placeholderTextColor="#73777A"
                 {...rest}
               />
               <View style={[styles.right]}>
@@ -173,7 +187,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderColor: VIETTEL_GRAY_01,
+    borderColor: '#44494D',
     paddingHorizontal: 12,
     marginHorizontal: 8,
     borderRadius: 6,
@@ -188,6 +202,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   center: {},
+  left: {
+    marginRight: 4,
+  },
   right: {
     flexDirection: 'row',
     // justifyContent: 'flex-end',
@@ -201,13 +218,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     marginBottom: 4,
-    color: VIETTEL_GRAY_01,
+    color: '#44494D',
   },
   requiredStar: {
-    color: REQUIRED_STAR_COLOR,
+    color: '#EE0033',
   },
   errorText: {
-    color: REQUIRED_STAR_COLOR,
+    color: '#EE0033',
     marginHorizontal: 8,
     marginTop: 4,
     fontWeight: '500',

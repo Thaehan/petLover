@@ -6,7 +6,7 @@ import {BottomNavigator} from './BottomNavigator';
 
 const Drawer = createDrawerNavigator();
 
-export function DrawerNavigation() {
+export default function DrawerNavigation() {
   return (
     <Drawer.Navigator
       screenOptions={{

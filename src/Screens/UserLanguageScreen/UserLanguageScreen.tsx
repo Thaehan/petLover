@@ -4,7 +4,7 @@ import {FormProvider, useForm} from 'react-hook-form';
 
 import AppRadioSelect from '@Components/AppRadioSelect';
 import useUserLanguage from './Services/useUserLanguage';
-import {AppButton} from '@Components/AppButton';
+import AppButton from '@Components/AppButton';
 import AppScreenContainer from '@Components/AppScreenContainer';
 
 export default function UserLanguageScreen() {

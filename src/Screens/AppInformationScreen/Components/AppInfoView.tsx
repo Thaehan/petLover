@@ -3,7 +3,7 @@ import React from 'react';
 
 import AppText from '@Components/AppText';
 import {useAppUpdateChecking} from '../Services/useAppInformation';
-import {AppButton} from '@Components/AppButton';
+import AppButton from '@Components/AppButton';
 
 export default function AppInfoView() {
   const {isNewest, appVersion} = useAppUpdateChecking();
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 20,
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 16,
     backgroundColor: 'white',
     borderRadius: 8,
     justifyContent: 'space-between',

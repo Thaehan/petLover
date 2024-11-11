@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderLeftWidth: 0,
     elevation: 0,
+    bottom: 20,
   },
   successToast: {
     backgroundColor: '#00000080',
@@ -59,12 +60,14 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     shadowOpacity: 0,
     elevation: 0,
+    bottom: 20,
   },
   errorToast: {
     backgroundColor: '#00000080',
     borderRadius: 10,
     borderLeftWidth: 0,
     elevation: 0,
+    bottom: 20,
   },
   contentContainer: {
     paddingHorizontal: 15,

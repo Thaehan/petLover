@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
 
-import {AppTextInput} from '@Components/AppTextInput';
-import {AppButton} from '@Components/AppButton';
+import AppTextInput from '@Components/AppTextInput';
+import AppButton from '@Components/AppButton';
 import useEditEmail from './Services/useEditEmail';
 import AppScreenContainer from '@Components/AppScreenContainer';
 
@@ -34,6 +34,7 @@ export default function UseEmailEditScreen() {
           }}
           secureTextEntry
           placeholder="Nhập email mới"
+          autoFocus
         />
         <AppTextInput
           control={form.control}

@@ -28,6 +28,7 @@ export type TInformationItem = {
   showNextIcon?: boolean;
   reverseStyle?: boolean;
   rightPartStyle?: StyleProp<ViewStyle>;
+  onLongPress?: () => void;
 };
 
 export default function InformationItem({
@@ -42,12 +43,15 @@ export default function InformationItem({
   showNextIcon,
   reverseStyle,
   rightPartStyle,
+  onLongPress,
 }: TInformationItem) {
   return (
     <TouchableOpacity
       style={[styles.item, style]}
       onPress={onPress}
-      activeOpacity={onPress ? 0.5 : 1}>
+      activeOpacity={onPress ? 0.5 : 1}
+      onLongPress={onLongPress}
+      delayLongPress={500}>
       <AppText
         style={[
           reverseStyle ? styles.detailInformation : styles.labelStyle,
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 16,
     alignItems: 'center',
   },
   labelStyle: {

@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
 
-import {AppTextInput} from '@Components/AppTextInput';
-import {AppButton} from '@Components/AppButton';
+import AppTextInput from '@Components/AppTextInput';
+import AppButton from '@Components/AppButton';
 import usePasswordEdit from './Services/usePasswordEdit';
 import AppScreenContainer from '@Components/AppScreenContainer';
 
@@ -41,6 +41,7 @@ export default function UserPasswordEditScreen() {
           }}
           secureTextEntry
           placeholder="Nhập mật khẩu hiện tại"
+          autoFocus
         />
         <AppTextInput
           control={form.control}
@@ -83,20 +84,6 @@ export default function UserPasswordEditScreen() {
           required
           rules={{
             required: 'Trường không được để trống',
-            minLength: {
-              value: 8,
-              message: 'Tối thiểu 8 ký tự',
-            },
-            maxLength: {
-              value: 32,
-              message: 'Tối đa 32 ký tự',
-            },
-            pattern: {
-              value:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-              message:
-                'Mật khẩu cần chứa chữ thường, in hoa, số, ký tự đặc biệt',
-            },
             validate: (value: string) => {
               const isEqualToPassword = value === form.getValues('newPassword');
               if (!isEqualToPassword) {
